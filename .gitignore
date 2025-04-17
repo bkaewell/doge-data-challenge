@@ -1,17 +1,17 @@
-# Ignore Jupyter notebook checkpoint files
+# 🚫 Ignore Jupyter notebook checkpoint files
 **/.ipynb_checkpoints/
 
-# Local config
+# 🚫 Local config
 .env
 
-# Data folders (user-generated content)
+# 🚫 User-generated data folders and content
 data/
 archive/
 
-# Python cache
+# 🚫 Python cache
 __pycache__/
 *.pyc
 
-# IDE/editor config
+# 🚫 IDE/editor config
 .DS_Store
 
