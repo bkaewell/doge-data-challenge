@@ -1,4 +1,4 @@
-# DOGE Data Challenge 🚀
+# 🏛️📜 DOGE Data Challenge 🚀
 - A data-driven look into U.S. federal regulations using the eCFR API — exploring word counts, trends over time, and custom metrics like regulatory density to inform de-regulation strategies
   
 - Analyze and visualize the Code of Federal Regulations (CFR) to support smarter government-wide decisions on regulatory impact
@@ -37,9 +37,11 @@ DATA_DIR=data
 ## 📂 Repository Overview  
 ```
 doge-data-challenge/                                # Root directory for the DOGE data challenge
-    ├── archive/                                    # 🚫 Cached agency snapshots and metadata (.gitignored)
-    ├── data/                                       # 🚫 Downloaded XMLs (.gitignored)
-        ├── regulations_xml/                        # XML files organized by <SNAPSHOT_DATE>
+    ├── archive/                                    # 🚫 Stores metadata (.gitignored)
+    │                                               # ↪️ Path defined by `ARCHIVE_DIR` in `.env`
+    ├── data/                                       # 🚫 Stores downloaded regulation XMLs (.gitignored)
+        ├── regulations_xml/                        # ↪️ Path defined by `DATA_DIR` in `.env`
+            ├── <SNAPSHOT_DATE>/                    # ↪️ Path defined by `SNAPSHOT_DATE` in `.env`
     ├── notebooks/                                  # Data pipeline notebooks
         ├── 01_agency_mapping_and_flatening.ipynb   # Flatten agency JSON to dataframe
         ├── 02_data_download_and_storage.ipynb      # Download and cache XMLs
