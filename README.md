@@ -13,7 +13,7 @@
 This technical assessment explores how to better understand and visualize the scale and complexity of U.S. federal regulations:
 
 - The **eCFR** contains over **200,000 pages** of regulatory text across ~150 agencies
-- The data is publicly accessible through an [official API](https://www.ecfr.gov/)
+- The data is publicly accessible through an [official API](https://www.ecfr.gov/reader-aids/ecfr-developer-resources/rest-api-interactive-documentation)
 - The goal: **build a tool to parse and analyze regulation data** for actionable insights
 
 ---
@@ -21,11 +21,11 @@ This technical assessment explores how to better understand and visualize the sc
 ## 📌 Key Deliverables
 
 - ✅ Download and parse regulation text from the eCFR API
-- ✅ Compute word counts, track changes over time (2020 → 2025), and generate SHA-256 checksums per agency
+- ✅ Compute word counts, track changes over time (i.e. 2020 → 2025), and generate SHA-256 checksums per agency
 - ✅ Normalize nested agency structures (including children) for accurate aggregation
 - ✅ Introduce a custom metric: **regulatory density** = words per CFR reference
-- ✅ Visualize agency sizes and regulation growth with clean plots
-- ✅ Build a modular pipeline for future extension (e.g., NLP-based analysis)
+- ✅ Visualize agency sizes and regulation growth
+- ✅ Build a modular pipeline for future extension (i.e., NLP-based analysis)
 
 ---
 
@@ -70,9 +70,8 @@ The `WORDCOUNT_METHOD` defined in your `.env` controls how regulation text is pa
 |----------|----------------------------------------------------------------------------|
 | `split`  | Simple `text.split()` based on whitespace — fast but may over/under count  |
 | `regex`  | Uses `\b\w+\b` to match real words — closer to Google Docs word count      |
-| `legal`  | Placeholder for stricter rules (e.g., exclude citations, headers, numbers) |
+| `legal`  | Placeholder for stricter rules (i.e., exclude citations, headers, numbers) |
 | `nlp`    | Placeholder for future spaCy/NLTK-style tokenization                       |
-| `hybrid` | Combine filters for advanced use cases — e.g., remove boilerplate or noise |
 
 ---
 
