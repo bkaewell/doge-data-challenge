@@ -19,6 +19,7 @@ def ensure_env_exists():
 SNAPSHOT_DATE={today}
 DATA_DIR={DEFAULT_DATA_DIR}
 ARCHIVE_DIR={DEFAULT_ARCHIVE_DIR}
+WORDCOUNT_METHOD=regex  # Options: split, regex, legal, nlp
 """
         ENV_PATH.write_text(default_env)
         print(f"🆕 Created .env file with default values:\n{default_env}")

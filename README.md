@@ -30,6 +30,7 @@ All configuration lives in .env. To change analysis to a different date, simply 
 SNAPSHOT_DATE=2025-03-27
 ARCHIVE_DIR=archive
 DATA_DIR=data
+WORDCOUNT_METHOD=regex  # Options: split, regex, legal, nlp
 ```
 
 ---
@@ -50,6 +51,7 @@ doge-data-challenge/                                # Root directory for the DOG
             ├── paths.py                            # Loads .env and builds file paths
             └── print_helpers.py                    # Shortens paths, nice output
             └── trim_notebook_outputs.py            # Optional: limit notebook output cell size for Git
+            └── wordcount.py                        # Word counting strategies 
     ├── .env.example                                # Template for local env config
     ├── .gitignore                                  # Prevents .env, data, checkpoints from being tracked
     ├── bootstrap.py                                # Sets up directory structure and config
