@@ -1,7 +1,31 @@
-# 🏛️📜 DOGE Data Challenge 🚀
-- A data-driven look into U.S. federal regulations using the eCFR API — exploring word counts, trends over time, and custom metrics like regulatory density to inform de-regulation strategies
-  
-- Analyze and visualize the Code of Federal Regulations (CFR) to support smarter government-wide decisions on regulatory impact
+# 🐶 DOGE Data Challenge 🚀
+
+🏛️ A data-driven look into U.S. federal regulations using the eCFR API — exploring word counts, trends over time, and custom metrics like regulatory density to inform smarter de-regulation strategies
+
+📜 Built to support data transparency and government-wide efficiency efforts through analysis of the Code of Federal Regulations (CFR)
+
+✒️ Hamilton had his pen —— I have my keyboard... Using data to untangle the regulatory state, one agency at a time
+
+---
+
+## 🎯 Project Purpose
+
+This technical assessment explores how to better understand and visualize the scale and complexity of U.S. federal regulations:
+
+- The **eCFR** contains over **200,000 pages** of regulatory text across ~150 agencies
+- The data is publicly accessible through an [official API](https://www.ecfr.gov/)
+- The goal: **build a tool to parse and analyze regulation data** for actionable insights
+
+---
+
+## 📌 Key Deliverables
+
+- ✅ Download and parse regulation text from the eCFR API
+- ✅ Compute word counts, track changes over time (2020 → 2025), and generate SHA-256 checksums per agency
+- ✅ Normalize nested agency structures (including children) for accurate aggregation
+- ✅ Introduce a custom metric: **regulatory density** = words per CFR reference
+- ✅ Visualize agency sizes and regulation growth with clean plots
+- ✅ Build a modular pipeline for future extension (e.g., NLP-based analysis)
 
 ---
 
@@ -20,18 +44,35 @@ python bootstrap.py
 This will:
 - ✅ Create a `.env` file if it doesn't exist
 - ✅ Set the default `SNAPSHOT_DATE` to today
+- ✅ Set the default `WORDCOUNT_METHOD` to `regex`
 - ✅ Create the necessary data folders under `data/` and `archive/`
 
 ---
 
 ## Configuration
-All configuration lives in .env. To change analysis to a different date, simply edit the `SNAPSHOT_DATE` in `.env`:
+All configuration lives in .env. You can manually set a specific date for analysis:
 ```ini
 SNAPSHOT_DATE=2025-03-27
+WORDCOUNT_METHOD=regex  # Options: split, regex, legal, nlp
+
 ARCHIVE_DIR=archive
 DATA_DIR=data
-WORDCOUNT_METHOD=regex  # Options: split, regex, legal, nlp
 ```
+  > 🔥🔥 `regex` balances speed and accuracy with NLP-style tokenization
+
+---
+
+## 🔢 Word Count Methods
+
+The `WORDCOUNT_METHOD` defined in your `.env` controls how regulation text is parsed and counted. This ensures transparency and consistency across analyses — especially when comparing different agencies or dates.
+
+| Method   | Description                                                                |
+|----------|----------------------------------------------------------------------------|
+| `split`  | Simple `text.split()` based on whitespace — fast but may over/under count  |
+| `regex`  | Uses `\b\w+\b` to match real words — closer to Google Docs word count      |
+| `legal`  | Placeholder for stricter rules (e.g., exclude citations, headers, numbers) |
+| `nlp`    | Placeholder for future spaCy/NLTK-style tokenization                       |
+| `hybrid` | Combine filters for advanced use cases — e.g., remove boilerplate or noise |
 
 ---
 
