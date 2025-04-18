@@ -1,17 +1,45 @@
-# doge-data-challenge
-A data-driven look into U.S. federal regulations using the eCFR API — exploring word counts, trends over time, and custom metrics like regulatory density to inform de-regulation strategies
-
+# DOGE Data Challenge 🚀
+- A data-driven look into U.S. federal regulations using the eCFR API — exploring word counts, trends over time, and custom metrics like regulatory density to inform de-regulation strategies
+  
+- Analyze and visualize the Code of Federal Regulations (CFR) to support smarter government-wide decisions on regulatory impact
 
 ---
+
+## ⚡ Quick Setup
+### 1️⃣ Clone the Repo  
+```bash
+git clone https://github.com/bkaewell/doge-data-challenge.git
+cd doge-data-challenge
+```
+
+### 2️⃣ Bootstrap Your Environment  
+```bash
+python bootstrap.py
+```
+
+This will:
+- ✅ Create a `.env` file if it doesn't exist
+- ✅ Set the default `SNAPSHOT_DATE` to today
+- ✅ Create the necessary data folders under `data/` and `archive/`
+
+---
+
+## Configuration
+All configuration lives in .env. To change analysis to a different date, simply edit the `SNAPSHOT_DATE` in `.env`:
+```ini
+SNAPSHOT_DATE=2025-03-27
+DATA_DIR=data
+ARCHIVE_DIR=archive
+```
+
+
 
 ## 📂 Repository Overview  
 ```
 doge-data-challenge/                                # Root directory for the DOGE data challenge
-    ├── .env.example                                # Template config for users
-    ├── .gitignore                                  # Ignores .env, data, checkpoints, etc.
-    ├── bootstrap.py                                # Bootstraps folders & environment from .env
-    ├── archive/                                    # 🚫 Generated CSV/metrics — ignored by Git
-    ├── data/                                       # 🚫 Downloaded XMLs — ignored by Git
+    ├── archive/                                    # 🚫 Cached agency snapshots and metadata (.gitignored)
+    ├── data/                                       # 🚫 Downloaded XMLs (.gitignored)
+        ├── regulations_xml/                        # XML files organized by <SNAPSHOT_DATE>
     ├── notebooks/                                  # Data pipeline notebooks
         ├── 01_agency_mapping_and_flatening.ipynb   # Flatten agency JSON to dataframe
         ├── 02_data_download_and_storage.ipynb      # Download and cache XMLs
@@ -20,7 +48,10 @@ doge-data-challenge/                                # Root directory for the DOG
         └── utils/
             ├── paths.py                            # Loads .env and builds file paths
             └── print_helpers.py                    # Shortens paths, nice output
-            └── trim_notebook_outputs.py            # Trims long cell outputs in notebooks (adjust MAX_LINES, etc.)
+            └── trim_notebook_outputs.py            # Optional: limit notebook output cell size for Git
+    ├── .env.example                                # Template for local env config
+    ├── .gitignore                                  # Prevents .env, data, checkpoints from being tracked
+    ├── bootstrap.py                                # Sets up directory structure and config
     ├── README.md                                   # Documentation (this file)  
 ```  
 
