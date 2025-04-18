@@ -20,10 +20,9 @@ def ensure_env_exists():
 SNAPSHOT_DATE={today}
 WORDCOUNT_METHOD={DEFAULT_WORDCOUNT_METHOD}
 ARCHIVE_DIR={DEFAULT_ARCHIVE_DIR}
-DATA_DIR={DEFAULT_DATA_DIR}
-"""
+DATA_DIR={DEFAULT_DATA_DIR}"""
         ENV_PATH.write_text(default_env)
-        print(f"🆕 Created .env file with default values:\n{default_env}")
+        print(f"\nCreated '.env' file with default values:\n{default_env}")
 
 def get_env_config():
     ensure_env_exists()
