@@ -28,11 +28,11 @@ This will:
 All configuration lives in .env. To change analysis to a different date, simply edit the `SNAPSHOT_DATE` in `.env`:
 ```ini
 SNAPSHOT_DATE=2025-03-27
-DATA_DIR=data
 ARCHIVE_DIR=archive
+DATA_DIR=data
 ```
 
-
+---
 
 ## 📂 Repository Overview  
 ```
@@ -57,3 +57,16 @@ doge-data-challenge/                                # Root directory for the DOG
 
 ---
 
+## 📚 Additional Documentation  
+
+TBD
+
+---
+
+## 🤝 Contributing & Contact    
+
+**🎯 Looking to contribute?** Open an issue or fork the repo!  
+**👨‍💻 Author:** [Brian Kaewell](https://github.com/bkaewell)  
+**📧 Contact:** Please open an issue [here](https://github.com/bkaewell/doge-data-challenge/issues)
+
+---
