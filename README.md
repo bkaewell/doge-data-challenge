@@ -37,11 +37,10 @@ DATA_DIR=data
 ## 📂 Repository Overview  
 ```
 doge-data-challenge/                                # Root directory for the DOGE data challenge
-    ├── archive/                                    # 🚫 Stores metadata (.gitignored)
-    │                                               # ↪️ Path defined by `ARCHIVE_DIR` in `.env`
-    ├── data/                                       # 🚫 Stores downloaded regulation XMLs (.gitignored)
-        ├── regulations_xml/                        # ↪️ Path defined by `DATA_DIR` in `.env`
-            ├── <SNAPSHOT_DATE>/                    # ↪️ Path defined by `SNAPSHOT_DATE` in `.env`
+    ├── <ARCHIVE_DIR>/                              # 🚫 Stores metadata (.gitignored)
+    ├── <DATA_DIR>/                                 # 🚫 Stores downloaded regulation XMLs (.gitignored)
+        ├── regulations_xml/
+            ├── <SNAPSHOT_DATE>/                    # Example snapshot path for each unique date
     ├── notebooks/                                  # Data pipeline notebooks
         ├── 01_agency_mapping_and_flatening.ipynb   # Flatten agency JSON to dataframe
         ├── 02_data_download_and_storage.ipynb      # Download and cache XMLs
