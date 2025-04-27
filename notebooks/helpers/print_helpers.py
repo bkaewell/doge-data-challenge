@@ -1,5 +1,8 @@
 from pathlib import Path
 
+"""
+Helper functions for clean, consistent printing of directory and path statuses.
+"""
 def shorten_path(path: Path) -> str:
     """
     Converts an absolute home path to ~ for cleaner display

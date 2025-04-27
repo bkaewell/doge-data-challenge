@@ -1,0 +1,22 @@
+from dotenv import load_dotenv
+from pathlib import Path
+import os
+
+"""
+Path management utilities: resolves key project directories based on .env configuration.
+"""
+def load_paths():
+    ROOT = Path(__file__).resolve().parents[2]  # utils/ is one deeper than notebooks/
+    load_dotenv(ROOT / ".env")
+    
+    archive_dir = os.getenv("ARCHIVE_DIR", "archive")
+    data_dir = os.getenv("DATA_DIR", "data")
+    snapshot_date = os.getenv("SNAPSHOT_DATE")
+    
+    return {
+        "ROOT": ROOT,
+        "ARCHIVE_PATH": ROOT / archive_dir,
+        "DATA_PATH": ROOT / data_dir,
+        "XML_SNAPSHOT_PATH": ROOT / data_dir / "regulations_xml" / snapshot_date,
+        "SNAPSHOT_DATE": snapshot_date,
+    }

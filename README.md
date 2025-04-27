@@ -2,7 +2,7 @@
 
 🏛️ A data-driven look into U.S. federal regulations using the eCFR API — exploring word counts, trends over time, and custom metrics like regulatory density to inform smarter de-regulation strategies
 
-📜 Built to support data transparency and government-wide efficiency efforts through analysis of the Code of Federal Regulations (CFR)
+📜 Built to support data transparency and government-wide efficiency efforts by analyzing the Code of Federal Regulations (CFR), unleashing prosperity through de-regulation
 
 ✒️ Hamilton had his pen —— I have my keyboard... Using data to untangle the regulatory state, one agency at a time
 
@@ -20,12 +20,12 @@ This technical assessment explores how to better understand and visualize the sc
 
 ## 📌 Key Deliverables
 
-- ✅ Download and parse regulation text from the eCFR API
-- ✅ Compute word counts, track changes over time (i.e. 2020 → 2025), and generate SHA-256 checksums per agency
-- ✅ Normalize nested agency structures (including children) for accurate aggregation
-- ✅ Introduce a custom metric: **regulatory density** = words per CFR reference
-- ✅ Visualize agency sizes and regulation growth
-- ✅ Build a modular pipeline for future extension (i.e., NLP-based analysis)
+- Download and parse regulation text from the eCFR API
+- Compute word counts, track changes over time (i.e. 2020 → 2025), and generate SHA-256 checksums per agency
+- Normalize nested agency structures (including children) for accurate aggregation
+- Introduce a custom metric: **regulatory density** = words per CFR reference
+- Visualize agency sizes and regulation growth
+- Build a modular pipeline for future extension (i.e. NLP-based analysis)
 
 ---
 
@@ -70,7 +70,7 @@ The `WORDCOUNT_METHOD` defined in your `.env` controls how regulation text is pa
 |----------|----------------------------------------------------------------------------|
 | `split`  | Simple `text.split()` based on whitespace — fast but may over/under count  |
 | `regex`  | Uses `\b\w+\b` to match real words — closer to Google Docs word count      |
-| `legal`  | Placeholder for stricter rules (i.e., exclude citations, headers, numbers) |
+| `legal`  | Placeholder for stricter rules (i.e. exclude citations, headers, numbers)  |
 | `nlp`    | Placeholder for future spaCy/NLTK-style tokenization                       |
 
 ---
