@@ -3,7 +3,9 @@ from pathlib import Path
 import os
 
 """
-Path management utilities: resolves key project directories based on .env configuration.
+Utility for loading project paths and .env config cleanly across notebooks
+
+This helps keep notebooks simple and lets users configure behavior through the .env file
 """
 def load_paths():
     ROOT = Path(__file__).resolve().parents[2]  # utils/ is one deeper than notebooks/
