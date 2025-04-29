@@ -78,20 +78,21 @@ The `WORDCOUNT_METHOD` defined in your `.env` controls how regulation text is pa
 ## 📂 Repository Overview  
 ```
 doge-data-challenge/                                # Root directory for the DOGE data challenge
-    ├── <ARCHIVE_DIR>/                              # 🚫 Stores metadata (.gitignored)
-    ├── <DATA_DIR>/                                 # 🚫 Stores downloaded regulation XMLs (.gitignored)
-        ├── regulations_xml/
-            ├── <SNAPSHOT_DATE>/                    # Example snapshot path for each unique date
+    ├── <ARCHIVE_DIR>/                              # Stores metadata (user-controlled from .env; 🚫 git ignored)
+    ├── <DATA_DIR>/                                 # Stores regulation XMLs (user-controlled from .env; 🚫 git ignored)
+        └── regulations_xml/
+            └── <SNAPSHOT_DATE>/                    # Example snapshot path for each unique date
     ├── notebooks/                                  # Data pipeline notebooks
-        ├── 01_agency_mapping_and_flatening.ipynb   # Flatten agency JSON to dataframe
-        ├── 02_data_download_and_storage.ipynb      # Download and cache XMLs
-        ├── 03_text_extraction_and_analysis.ipynb   # Extract, parse, and analyze text
-        ├── 04_visualization_and_reporting.ipynb    # Metrics + charts + reporting
-        └── utils/
-            ├── paths.py                            # Loads .env and builds file paths
-            └── print_helpers.py                    # Shortens paths, nice output
-            └── trim_notebook_outputs.py            # Optional: limit notebook output cell size for Git
-            └── wordcount.py                        # Word counting strategies 
+        └── 01_agency_mapping_and_flatening.ipynb   # Flatten agency JSON to dataframe
+        └── 02_data_download_and_storage.ipynb      # Download and cache XMLs
+        └── 03_text_extraction_and_analysis.ipynb   # Extract, parse, and analyze text
+        └── 04_visualization_and_reporting.ipynb    # Metrics + charts + reporting
+    ├── helpers/
+        └── __init__.py
+        └── env_paths.py                        # Loads .env and builds dynamic file paths
+        └── print_helpers.py                    # Shortens paths, nice output
+        └── trim_notebook_outputs.py            # Optional: limit notebook output cell size for Git
+        └── wordcount.py                        # Word counting strategies 
     ├── .env.example                                # Template for local env config
     ├── .gitignore                                  # Prevents .env, data, checkpoints from being tracked
     ├── bootstrap.py                                # Sets up directory structure and config
@@ -113,3 +114,20 @@ TBD
 **📧 Contact:** Please open an issue [here](https://github.com/bkaewell/doge-data-challenge/issues)
 
 ---
+
+
+### Potential quick setup additions:
+- bootstrap.py (at repo root) handles setting up .env (at root)
+- You have your nice get_paths() helper function now that builds paths dynamically.
+- Item	Location	Purpose
+- .env	repo root	Single source of truth for settings
+- bootstrap.py	repo root	First setup step to create .env
+- helpers/env_paths.py	inside notebooks	Hide technical loading details
+- notebooks	clean main workspace	only light imports, no clutter
+
+- 🎯 Summary:
+- Load .env from ROOT = two levels up if in notebooks/utils/, one level up if just notebooks/.
+
+- Build all your major repo paths off of that ROOT.
+
+- Your .env controls all folder names easily and portably.
