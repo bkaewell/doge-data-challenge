@@ -17,6 +17,7 @@ def ensure_env_exists():
     if not ENV_PATH.exists():
         today = datetime.today().strftime("%Y-%m-%d")
         default_env = f"""# Auto-generated .env
+PYTHONPATH=.
 SNAPSHOT_DATE={today}
 WORDCOUNT_METHOD={DEFAULT_WORDCOUNT_METHOD}
 ARCHIVE_DIR={DEFAULT_ARCHIVE_DIR}
