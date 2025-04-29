@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
-from notebooks.utils.print_helpers import shorten_path, print_dir_status
+from helpers.print_helpers import shorten_path, print_dir_status
 
 # Constants
 PROJECT_ROOT = Path(__file__).resolve().parent
