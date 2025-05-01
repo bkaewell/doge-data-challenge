@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "doge-data-challenge"
 version = "0.1.0"
-description = ""
+description = "Data pipeline for DOGE regulation analysis"
 authors = ["Brian Kaewell <briankaewell@gmail.com>"]
 readme = "README.md"
-packages = []
-package-mode = false
+packages = [{include = "doge_data_challenge"}]
+# package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.10"

@@ -14,3 +14,6 @@ __pycache__/
 
 # 🚫 IDE/editor config
 .DS_Store
+
+.Python
+poetry.lock
