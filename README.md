@@ -101,8 +101,8 @@ doge-data-challenge/
 ├── .gitignore                                  # Ignores .env, data, checkpoints, and cache files
 ├── poetry.lock                                 # Locks dependency versions (git-ignored)
 ├── pyproject.toml                              # Poetry configuration and dependencies
-├── archive/                                    # Stores metadata (git-ignored)
-└── data/                                       # Stores regulation XMLs (git-ignored)
+├── archive/                                    # Stores metadata (git-ignored to keep repo lightweight)
+└── data/                                       # Stores regulation XMLs (git-ignored to keep repo lightweight)
     └── regulations_xml/
         └── 2025-04-17/                         # Example snapshot directory
 ```  
@@ -139,3 +139,55 @@ TBD
 - Build all your major repo paths off of that ROOT.
 
 - Your .env controls all folder names easily and portably.
+
+
+### Overview
+The DOGE Data Challenge processes regulation XML snapshots to map agencies, extract text, and produce analytical reports. Key features include:
+
+- **Dynamic Configuration:** Paths and settings are managed via a .env file, with defaults set by bootstrap.py
+- **Modular Utilities:** Helper functions (i.e., path management, text processing) are packaged with **Poetry** for reusability
+- **Notebook Pipeline:** Several **Jupyter** notebooks handle data ingestion, processing, analysis, and visualization
+- **Testing:** Unit tests ensure reliability of core utilities
+
+### Setup
+Install Poetry:
+```bash
+pip install poetry
+```
+
+Clone the repository:
+```bash
+git clone https://github.com/bkaewell/doge-data-challenge.git
+cd doge-data-challenge
+```
+
+Install dependencies:
+```bash
+poetry install
+```
+
+Verify pyproject.toml is up to date with all dependencies (pandas, matplotlib, etc.);
+poetry add python-dotenv jupyter
+
+
+Bootstrap project:
+```bash
+poetry run python bootstrap.py
+```
+
+This creates a .env file with default values if none exists.
+
+Run notebooks:
+```bash
+poetry run jupyter-notebook
+```
+
+### Usage
+- Configure .env (copy .env.example and edit) to set SNAPSHOT_DATE, ARCHIVE_DIR, etc.
+- Run notebooks in order (01_agency_mapping_and_flattening.ipynb to 04_visualization_and_reporting.ipynb).
+- Each notebook uses init_notebook() to load paths:
+```python
+from doge_data_challenge.helpers import init_notebook
+paths = init_notebook()
+```
+
