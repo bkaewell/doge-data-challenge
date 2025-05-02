@@ -18,47 +18,58 @@ This technical assessment explores how to better understand and visualize the sc
 
 ---
 
-## 📌 Key Deliverables
+## Overview
+The DOGE Data Challenge processes regulation XML snapshots to map agencies, extract text, and produce analytical reports. Key features include:
 
-- Download and parse regulation text from the eCFR API
-- Compute word counts, track changes over time (i.e. 2020 → 2025), and generate SHA-256 checksums per agency
-- Normalize nested agency structures (including children) for accurate aggregation
-- Introduce a custom metric: **regulatory density** = words per CFR reference
-- Visualize agency sizes and regulation growth
-- Build a modular pipeline for future extension (i.e. NLP-based analysis)
+- **Dynamic Configuration:** Paths and settings are managed via a .env file, with defaults set by bootstrap.py
+- **Modular Utilities:** Helper functions (i.e., path management, text processing) are packaged with **Poetry** for reusability
+- **Notebook Pipeline:** Several **Jupyter** notebooks handle data ingestion, processing, analysis, and visualization
+- **Testing:** Unit tests ensure reliability of core utilities
 
 ---
 
 ## ⚡ Quick Setup
-### 1️⃣ Clone the Repo  
+### 1️⃣ Install Poetry:
+```bash
+pip install poetry
+```
+Manual Path Setup: If ~/.local/bin isn’t in your PATH, you may need to add it manually (e.g., export PATH="$HOME/.local/bin:$PATH")
+
+### 2️⃣ Clone the repository:
 ```bash
 git clone https://github.com/bkaewell/doge-data-challenge.git
 cd doge-data-challenge
 ```
 
-### 2️⃣ Bootstrap Your Environment  
+### 3️⃣ Install dependencies:
 ```bash
-python bootstrap.py
+poetry install
 ```
+Verify pyproject.toml is up to date with all dependencies (pandas, matplotlib, etc.);
+poetry add python-dotenv jupyter
+This doge-data-challenge project uses Poetry to manage dependencies and package doge_data_challenge/helpers/
 
-This will:
-- ✅ Create a `.env` file if it doesn't exist
-- ✅ Set the default `SNAPSHOT_DATE` to today
-- ✅ Set the default `WORDCOUNT_METHOD` to `regex`
-- ✅ Create the necessary data folders under `data/` and `archive/`
+### 4️⃣ Bootstrap project:
+```bash
+poetry run python bootstrap.py
+```
+This creates a .env file with default values if none exists.
+
+### 5️⃣ Run notebooks:
+```bash
+poetry run jupyter-notebook
+```
 
 ---
 
-## Configuration
-All configuration lives in .env. You can manually set a specific date for analysis:
-```ini
-SNAPSHOT_DATE=2025-03-27
-WORDCOUNT_METHOD=regex  # Options: split, regex, legal, nlp
-
-ARCHIVE_DIR=archive
-DATA_DIR=data
+## Usage
+- Configure .env (copy .env.example and edit) to set SNAPSHOT_DATE, ARCHIVE_DIR, etc.
+- Run notebooks in order (01_agency_mapping_and_flattening.ipynb to 04_visualization_and_reporting.ipynb).
+- Each notebook uses init_notebook() to load paths:
+```python
+from doge_data_challenge.helpers import init_notebook
+paths = init_notebook()
 ```
-  > 🔥🔥 `regex` balances speed and accuracy with NLP-style tokenization
 
 ---
 
@@ -123,71 +134,46 @@ TBD
 
 ---
 
+## **BACKUP**
 
-### Potential quick setup additions:
-- bootstrap.py (at repo root) handles setting up .env (at root)
-- You have your nice get_paths() helper function now that builds paths dynamically.
-- Item	Location	Purpose
-- .env	repo root	Single source of truth for settings
-- bootstrap.py	repo root	First setup step to create .env
-- helpers/env_paths.py	inside notebooks	Hide technical loading details
-- notebooks	clean main workspace	only light imports, no clutter
+## 📌 Key Deliverables
 
-- 🎯 Summary:
-- Load .env from ROOT = two levels up if in notebooks/utils/, one level up if just notebooks/.
+- Download and parse regulation text from the eCFR API
+- Compute word counts, track changes over time (i.e. 2020 → 2025), and generate SHA-256 checksums per agency
+- Normalize nested agency structures (including children) for accurate aggregation
+- Introduce a custom metric: **regulatory density** = words per CFR reference
+- Visualize agency sizes and regulation growth
+- Build a modular pipeline for future extension (i.e. NLP-based analysis)
 
-- Build all your major repo paths off of that ROOT.
-
-- Your .env controls all folder names easily and portably.
-
-
-### Overview
-The DOGE Data Challenge processes regulation XML snapshots to map agencies, extract text, and produce analytical reports. Key features include:
-
-- **Dynamic Configuration:** Paths and settings are managed via a .env file, with defaults set by bootstrap.py
-- **Modular Utilities:** Helper functions (i.e., path management, text processing) are packaged with **Poetry** for reusability
-- **Notebook Pipeline:** Several **Jupyter** notebooks handle data ingestion, processing, analysis, and visualization
-- **Testing:** Unit tests ensure reliability of core utilities
-
-### Setup
-Install Poetry:
-```bash
-pip install poetry
-```
-
-Clone the repository:
+## ⚡ Quick Setup
+### 1️⃣ Clone the Repo  
 ```bash
 git clone https://github.com/bkaewell/doge-data-challenge.git
 cd doge-data-challenge
 ```
 
-Install dependencies:
+### 2️⃣ Bootstrap Your Environment  
 ```bash
-poetry install
+python bootstrap.py
 ```
 
-Verify pyproject.toml is up to date with all dependencies (pandas, matplotlib, etc.);
-poetry add python-dotenv jupyter
+This will:
+- ✅ Create a `.env` file if it doesn't exist
+- ✅ Set the default `SNAPSHOT_DATE` to today
+- ✅ Set the default `WORDCOUNT_METHOD` to `regex`
+- ✅ Create the necessary data folders under `data/` and `archive/`
 
+---
 
-Bootstrap project:
-```bash
-poetry run python bootstrap.py
+## Configuration
+All configuration lives in .env. You can manually set a specific date for analysis:
+```ini
+SNAPSHOT_DATE=2025-03-27
+WORDCOUNT_METHOD=regex  # Options: split, regex, legal, nlp
+
+ARCHIVE_DIR=archive
+DATA_DIR=data
 ```
+  > 🔥🔥 `regex` balances speed and accuracy with NLP-style tokenization
 
-This creates a .env file with default values if none exists.
-
-Run notebooks:
-```bash
-poetry run jupyter-notebook
-```
-
-### Usage
-- Configure .env (copy .env.example and edit) to set SNAPSHOT_DATE, ARCHIVE_DIR, etc.
-- Run notebooks in order (01_agency_mapping_and_flattening.ipynb to 04_visualization_and_reporting.ipynb).
-- Each notebook uses init_notebook() to load paths:
-```python
-from doge_data_challenge.helpers import init_notebook
-paths = init_notebook()
-```
-
+---
