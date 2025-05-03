@@ -89,33 +89,40 @@ The `WORDCOUNT_METHOD` defined in your `.env` controls how regulation text is pa
 ## 📂 Repository Overview  
 ```
 doge-data-challenge/
-├── README.md                   # Documentation (this file)
-├── bootstrap.py                # Sets up .env and directories with default values
+├── README.md               # Documentation (this file)
+├── bootstrap.py            # Sets up .env with default values
 ├── doge_data_challenge/
-│   ├── __init__.py             # Marks doge_data_challenge as a Python package
-│   └── helpers/                # Reusable utility functions
-│       ├── __init__.py         # Exposes helper functions for import
-│       ├── env_paths.py        # Loads .env and defines project paths
-│       ├── init_notebook.py                    # Initializes notebooks with sys.path and paths
-│       ├── print_helpers.py                    # Formats and prints directory status messages
-│       ├── trim_notebook_outputs.py            # Limits notebook output size for Git
-│       └── wordcount.py                        # Implements word counting strategies
+│   ├── __init__.py         # Marks doge_data_challenge as a Poetry Python package
+│   └── helpers/            # Reusable utility functions
+│       ├── __init__.py                # Exposes helper functions for import
+│       ├── env_paths.py               # Loads .env and defines project paths
+│       ├── init_notebook.py           # Initializes notebooks with sys.path and paths
+│       ├── print_helpers.py           # Formats and prints directory status messages
+│       ├── trim_notebook_outputs.py   # Limits notebook output size for Git
+│       └── wordcount.py               # Implements word counting strategies
 ├── notebooks/                                  # Data pipeline notebooks
-│   ├── 01_agency_mapping_and_flattening.ipynb  # Maps agency JSON to a dataframe
+│   ├── 01_agency_scraper.ipynb                 # Scrapes, maps, and flattens agency JSON to a dataframe
 │   ├── 02_data_download_and_storage.ipynb      # Downloads and caches XMLs
 │   ├── 03_text_extraction_and_analysis.ipynb   # Extracts and analyzes text
 │   └── 04_visualization_and_reporting.ipynb    # Generates metrics and charts
 ├── tests/                                      # Unit tests for reliability
 │   ├── __init__.py
-│   └── test_env_paths.py                       # Tests path loading and directory creation
-├── .env.example                                # Template for .env configuration
-├── .gitignore                                  # Ignores .env, data, checkpoints, and cache files
-├── poetry.lock                                 # Locks dependency versions (git-ignored)
-├── pyproject.toml                              # Poetry configuration and dependencies
-├── archive/                                    # Stores metadata (git-ignored to keep repo lightweight)
-└── data/                                       # Stores regulation XMLs (git-ignored to keep repo lightweight)
-    └── regulations_xml/
-        └── 2025-04-17/                         # Example snapshot directory
+│   └── test_env_paths.py            # Tests path loading and directory creation
+├── .env                             # Configuration file
+├── .gitignore                       # Ignores .env, data, checkpoints, and cache files
+├── poetry.lock                      # Locks dependency versions (Git-ignored)
+├── pyproject.toml                   # Poetry configuration and dependencies
+│
+│                                    # Below is Git-ignored to keep repo lightweight
+│                                    ###############################################
+├── {AGENCY_METADATA_DIR}/           # Stores metadata
+│   └── {SNAPSHOT_DATE}/             
+│       ├── agencies.json            # Top-level JSON from API
+│       └── flattened_agencies.csv   # Output from 01_agency_scraper
+│   ...
+└── {REGULATION_TEXT_DIR}/           # Regulation XMLs from API
+│   └── {SNAPSHOT_DATE}/             
+│   ...                              # Output from 02_data_download_and_storage 
 ```  
 
 ---
@@ -164,6 +171,11 @@ This will:
 - ✅ Create the necessary data folders under `data/` and `archive/`
 
 ---
+
+Context: The project involves scraping agency metadata and regulation texts, organized by SNAPSHOT_DATE. The .env file defines AGENCY_METADATA_DIR and REGULATION_TEXT_DIR, and users may extend it for snapshot-specific configurations
+
+
+
 
 ## Configuration
 All configuration lives in .env. You can manually set a specific date for analysis:

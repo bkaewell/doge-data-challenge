@@ -1,9 +1,6 @@
-# 🚫 User-generated data folders and content
-data/
-archive/
-
-# 🚫 Local config
-.env
+# 🚫 Hardcode the user-generated data folders and content from .env
+agency_metadata/
+regulation_text/
 
 # 🚫 Ignore Jupyter notebook checkpoint files
 **/.ipynb_checkpoints/

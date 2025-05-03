@@ -1,30 +1,29 @@
 #!/usr/bin/env python3
 
-#!/usr/bin/env python3
-from datetime import datetime
 from pathlib import Path
+from datetime import datetime
 from doge_data_challenge.helpers.print_helpers import print_dir_status
 
 # Constants
 PROJECT_ROOT = Path(__file__).resolve().parent
 ENV_PATH = PROJECT_ROOT / ".env"
-DEFAULT_WORDCOUNT_METHOD = "regex"
-DEFAULT_ARCHIVE_DIR = "archive"
-DEFAULT_DATA_DIR = "data"
+#DEFAULT_WORDCOUNT_METHOD = "regex"
+#DEFAULT_ARCHIVE_DIR = "archive"
+#DEFAULT_DATA_DIR = "data"
 
 
-def ensure_env_exists():
-    """Create .env file with default values if it doesn't exist."""
-    if not ENV_PATH.exists():
-        today = datetime.today().strftime("%Y-%m-%d")
-        default_env = f"""# Auto-generated .env
-SNAPSHOT_DATE={today}
-WORDCOUNT_METHOD={DEFAULT_WORDCOUNT_METHOD}
-ARCHIVE_DIR={DEFAULT_ARCHIVE_DIR}
-DATA_DIR={DEFAULT_DATA_DIR}
-"""
-        ENV_PATH.write_text(default_env)
-        print(f"\nCreated '.env' file with default values:\n{default_env}")
+#def ensure_env_exists():
+#    """Create .env file with default values if it doesn't exist."""
+#    if not ENV_PATH.exists():
+#        today = datetime.today().strftime("%Y-%m-%d")
+#        default_env = f"""# Auto-generated .env
+#SNAPSHOT_DATE={today}
+#WORDCOUNT_METHOD={DEFAULT_WORDCOUNT_METHOD}
+#ARCHIVE_DIR={DEFAULT_ARCHIVE_DIR}
+#DATA_DIR={DEFAULT_DATA_DIR}
+#"""
+#        ENV_PATH.write_text(default_env)
+#        print(f"\nCreated '.env' file with default values:\n{default_env}")
 
 
 def validate_snapshot_date(snapshot_date: str) -> None:
@@ -53,8 +52,8 @@ def bootstrap():
     print("\nSetting up DOGE data workspace...")
     print(f"Snapshot Date:       {snapshot_date}")
     print(f"Word Count Strategy: {paths['WORDCOUNT_METHOD']}")
-    print_dir_status("Archive Directory:", paths["ARCHIVE_PATH"])
-    print_dir_status("XML Directory:", paths["XML_SNAPSHOT_PATH"])
+    print_dir_status("Agency Metadata Directory:", paths["AGENCY_METADATA_PATH"])
+    print_dir_status("Regulation Text Directory:", paths["REGULATION_TEXT_PATH"])
     print("\n🎉 Bootstrap complete! You can now run the notebooks.\n")
 
 
