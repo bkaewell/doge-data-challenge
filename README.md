@@ -53,7 +53,7 @@ This doge-data-challenge project uses Poetry to manage dependencies and package 
 ```bash
 poetry run python bootstrap.py
 ```
-This creates a .env file with default values if none exists.
+This creates 
 
 ### 5️⃣ Run notebooks:
 ```bash
@@ -90,7 +90,7 @@ The `WORDCOUNT_METHOD` defined in your `.env` controls how regulation text is pa
 ```
 doge-data-challenge/
 ├── README.md               # Documentation (this file)
-├── bootstrap.py            # Sets up .env with default values
+├── bootstrap.py            # Validates .env config and sets up workspace for data pipeline
 ├── doge_data_challenge/
 │   ├── __init__.py         # Marks doge_data_challenge as a Poetry Python package
 │   └── helpers/            # Reusable utility functions
@@ -121,7 +121,9 @@ doge-data-challenge/
 │       └── flattened_agencies.csv   # Output from 01_agency_scraper
 │   ...
 └── {REGULATION_TEXT_DIR}/           # Regulation XMLs from API
-│   └── {SNAPSHOT_DATE}/             
+│   └── {SNAPSHOT_DATE}/
+│       └── title_N/
+│           └── chapter_N.xml
 │   ...                              # Output from 02_data_download_and_storage 
 ```  
 
@@ -183,8 +185,8 @@ All configuration lives in .env. You can manually set a specific date for analys
 SNAPSHOT_DATE=2025-03-27
 WORDCOUNT_METHOD=regex  # Options: split, regex, legal, nlp
 
-ARCHIVE_DIR=archive
-DATA_DIR=data
+AGENCY_METADATA_DIR=agency_metadata
+REGULATION_TEXT_DIR=regulation_text
 ```
   > 🔥🔥 `regex` balances speed and accuracy with NLP-style tokenization
 

@@ -15,13 +15,8 @@ def shorten_path(path: Path) -> str:
 
 def print_dir_status(label: str, path: Path):
     """
-    Creates the directory if needed and prints a status message with emoji.
+    Prints a status message for a directory with an emoji indicating existence
     """
-    try:
-        path.mkdir(parents=True, exist_ok=True)
-        emoji = "✅"
-    except Exception:
-        emoji = "❌"
+    emoji = "✅" if path.exists() else "❌"
     # Aligns label and prints directory path with emoji status
-    print(f"{label:<20} {shorten_path(path)} {emoji}")
-
+    print(f"{label:<26} {shorten_path(path)} {emoji}")
