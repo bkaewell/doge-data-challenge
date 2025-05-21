@@ -2,15 +2,18 @@
 
 import os
 from pathlib import Path
+from datetime import datetime
 from dotenv import load_dotenv
 
 
-def load_paths() -> dict[str, Path | str]:
+def load_paths() -> tuple[dict[str, Path], dict[str, str]]:
     """
-    Load project paths from .env configuration, creating directories if needed
+    Load project paths and configuration from .env, creating directories if needed
 
     Returns:
-        Dictionary with project paths and configuration values
+        Tuple of two dictionaries:
+        - paths: Dictionary of project directory paths (Path objects)
+        - config: Dictionary of non-path configuration values (strings)
     """
     # Resolve project root (helpers/ -> doge_data_challenge/ -> root)
     root = Path(__file__).resolve().parents[2]
@@ -18,32 +21,31 @@ def load_paths() -> dict[str, Path | str]:
 
     if not env_path.exists():
         raise FileNotFoundError(
-#           f".env file not found at {env_path}. Run bootstrap.py to create it."
-            f".env file not found at {env_path}"
+            f".env file not found at {env_path}. Restore it from the repository."
         )
 
     load_dotenv(dotenv_path=env_path)
-    snapshot_date = os.getenv("SNAPSHOT_DATE")
+    today = datetime.today().strftime("%Y-%m-%d")
+    snapshot_date = os.getenv("SNAPSHOT_DATE", today)
     agency_metadata_dir = os.getenv("AGENCY_METADATA_DIR", "agency_metadata")
     regulation_text_dir = os.getenv("REGULATION_TEXT_DIR", "regulation_text")
     wordcount_method = os.getenv("WORDCOUNT_METHOD", "regex")
 
-    # Validate SNAPSHOT_DATE (basic check, since bootstrap.py validates format)
-    if not snapshot_date:
-        raise ValueError("SNAPSHOT_DATE must be set in .env")
-
+    # Define paths and create directories
     paths = {
         "ROOT": root,
-        "SNAPSHOT_DATE": snapshot_date,
         "AGENCY_METADATA_PATH": root / agency_metadata_dir / snapshot_date,
         "REGULATION_TEXT_PATH": root / regulation_text_dir / snapshot_date,
- #       "XML_SNAPSHOT_PATH": root / data_dir / "regulations_xml" / snapshot_date,
-        "WORDCOUNT_METHOD": wordcount_method,
     }
 
     # Create directories
-    for path_name, path in paths.items():
-        if isinstance(path, Path) and "PATH" in path_name:
-            path.mkdir(parents=True, exist_ok=True)
+    paths["AGENCY_METADATA_PATH"].mkdir(parents=True, exist_ok=True)
+    paths["REGULATION_TEXT_PATH"].mkdir(parents=True, exist_ok=True)
 
-    return paths
+    # Define non-path configuration
+    config = {
+        "SNAPSHOT_DATE": snapshot_date,
+        "WORDCOUNT_METHOD": wordcount_method,
+    }
+
+    return paths, config
