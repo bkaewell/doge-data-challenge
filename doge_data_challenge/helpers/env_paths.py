@@ -6,9 +6,9 @@ from datetime import datetime
 from dotenv import load_dotenv
 
 
-def load_paths() -> tuple[dict[str, Path], dict[str, str]]:
+def setup_env() -> tuple[dict[str, Path], dict[str, str]]:
     """
-    Load project paths and configuration from .env, creating directories if needed
+    Set up project paths and configuration from .env, creating directories if needed
 
     Returns:
         Tuple of two dictionaries:
@@ -27,6 +27,10 @@ def load_paths() -> tuple[dict[str, Path], dict[str, str]]:
     load_dotenv(dotenv_path=env_path)
     today = datetime.today().strftime("%Y-%m-%d")
     snapshot_date = os.getenv("SNAPSHOT_DATE", today)
+    # Handle empty SNAPSHOT_DATE
+    if not snapshot_date:
+        snapshot_date = today
+
     agency_metadata_dir = os.getenv("AGENCY_METADATA_DIR", "agency_metadata")
     regulation_text_dir = os.getenv("REGULATION_TEXT_DIR", "regulation_text")
     wordcount_method = os.getenv("WORDCOUNT_METHOD", "regex")
