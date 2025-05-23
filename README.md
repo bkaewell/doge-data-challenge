@@ -95,7 +95,7 @@ doge-data-challenge/
 │   ├── __init__.py         # Marks doge_data_challenge as a Poetry Python package
 │   └── helpers/            # Reusable utility functions
 │       ├── __init__.py                # Exposes helper functions for import
-│       ├── env_paths.py               # Loads .env and defines project paths
+│       ├── env_setup.py               # Sets up project paths and config from .env
 │       ├── init_notebook.py           # Initializes notebooks with sys.path and paths
 │       ├── print_helpers.py           # Formats and prints directory status messages
 │       ├── trim_notebook_outputs.py   # Limits notebook output size for Git
