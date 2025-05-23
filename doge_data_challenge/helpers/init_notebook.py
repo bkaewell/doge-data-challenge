@@ -2,7 +2,7 @@
 
 import sys
 from pathlib import Path
-from .env_paths import load_paths
+from .env_setup import setup_env
 
 def init_notebook() -> dict[str, Path | str]:
     """
