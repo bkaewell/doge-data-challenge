@@ -5,7 +5,7 @@ Helper functions for clean, consistent printing of directory and path statuses.
 """
 def shorten_path(path: Path) -> str:
     """
-    Converts an absolute home path to ~ for cleaner display
+    Converts an absolute home path to ~ for cleaner and safer display
     """
     try:
         home = str(Path.home())
@@ -19,4 +19,8 @@ def print_dir_status(label: str, path: Path):
     """
     emoji = "✅" if path.exists() else "❌"
     # Aligns label and prints directory path with emoji status
-    print(f"{label:<26} {shorten_path(path)} {emoji}")
+    # Example output:
+    # Agency Metadata Directory: 
+    # Regulation Text Directory: 
+    char_width = 26
+    print(f"{label:<{char_width}} {shorten_path(path)} {emoji}")
